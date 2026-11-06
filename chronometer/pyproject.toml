@@ -1,6 +1,6 @@
 [project]
 name = "chronometer"
-version = "0.1.0"
+version = "0.2.0"
 description = "Toy app for practicing Tempo-related skills"
 readme = "README.md"
 authors = [
