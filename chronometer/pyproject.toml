@@ -27,3 +27,6 @@ dev = [
 [tool.mypy]
 strict = true
 files = ["src", "tests"]
+
+[tool.pyrefly]
+python-interpreter-path = ".venv/bin/python"
