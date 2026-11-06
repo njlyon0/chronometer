@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 from datetime import date
 
+
 # Define a Person class (with a hint for the dev that `name` should be a string)
 @dataclass(frozen=True)
 class Person:
@@ -22,7 +23,7 @@ class WeeklyHours:
     week_of: date
     hours: float
 
-    # Fail to create a WeeklyHours object if `hours` are negative or `week_of` date isn't a Monday. 
+    # Fail to create a WeeklyHours object if `hours` are negative or `week_of` date isn't a Monday.
     # (Called automatically at the end of the `__init__` that `@dataclass` generates)
     def __post_init__(self) -> None:
         # Throw an error for negative time
@@ -31,6 +32,7 @@ class WeeklyHours:
         # Throw an error for non-Monday week dates
         if self.week_of.weekday() != 0:
             raise ValueError(f"week_of must be a Monday, got {self.week_of:%A}")
+
 
 # Define the `add_hours()` function
 def add_hours(
