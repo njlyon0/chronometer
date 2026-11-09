@@ -4,11 +4,22 @@ services:
     build:
       context: .
       target: app
+    # Wait until Postgres is accepting connections, not just started
+    depends_on:
+      db:
+        condition: service_healthy
 
   # Postgres database; reachable from `app` at hostname `db`
   db:
     image: postgres:16
     env_file: .env
+    # `$$` defers expansion to the container, where the .env values are set
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     volumes:
       - pgdata:/var/lib/postgresql/data
 
