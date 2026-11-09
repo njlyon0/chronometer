@@ -4,3 +4,6 @@
 # Environment management & misc. Python stuff
 .venv/
 __pycache__/
+
+# Local secrets
+.env
