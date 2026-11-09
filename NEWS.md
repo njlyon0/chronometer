@@ -1,3 +1,9 @@
+## Version 0.3.0 - Dev
+
+This is the development version, changes will be listed below as they are made.
+
+- No changes (yet)
+
 ## Version 0.2.0 - Containers
 
 - Containerized with Docker; supports a `build` and `test` command
