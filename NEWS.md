@@ -2,6 +2,9 @@
 
 This is the development version, changes will be listed below as they are made.
 
+- Adds Django app scaffolding (`app/manage.py`, `app/config/`, & `app/tracker/`)
+
+
 ## Version 0.3.0 - Queries
 
 Adds `docker-compose.yml` with `app` and `db` services. Allows connection to named Postgres volume via local `.env`. Connection to `db` requires successful healthcheck.
