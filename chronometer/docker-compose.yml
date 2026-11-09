@@ -1,0 +1,10 @@
+services:
+  # The Chronometer app, built from the local Dockerfile (default `app` stage)
+  app:
+    build:
+      context: .
+      target: app
+
+  # Postgres database; reachable from `app` at hostname `db`
+  db:
+    image: postgres:16
