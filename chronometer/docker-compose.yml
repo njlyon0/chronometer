@@ -4,6 +4,12 @@ services:
     build:
       context: .
       target: app
+    # Same credentials as `db`; reach Postgres via its service name
+    env_file: .env
+    environment:
+      DB_HOST: db
+    # For now, just check that the database connection works
+    command: ["chronometer-db-check"]
     # Wait until Postgres is accepting connections, not just started
     depends_on:
       db:

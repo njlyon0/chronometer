@@ -7,10 +7,13 @@ authors = [
     { name = "njlyon0", email = "nicholasjlyon@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "psycopg[binary]>=3.3.8",
+]
 
 [project.scripts]
 chronometer = "chronometer:main"
+chronometer-db-check = "chronometer.db_check:main"
 
 [build-system]
 requires = ["uv_build>=0.13.1,<0.14.0"]
