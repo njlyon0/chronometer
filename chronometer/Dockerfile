@@ -16,6 +16,7 @@ RUN uv sync --locked --no-dev --no-install-project
 # 2) Copy source and install the project
 COPY README.md ./
 COPY src ./src
+COPY app ./app
 RUN uv sync --locked --no-dev
 
 ENV PATH="/app/.venv/bin:$PATH"
