@@ -19,6 +19,7 @@ class Project(models.Model):
     def __str__(self) -> str:
         return self.name
 
+
 # Table for hours that one person spent on one project in one week
 class WeeklyHours(models.Model):
     person = models.ForeignKey(
