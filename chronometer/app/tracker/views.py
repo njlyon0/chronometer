@@ -1,6 +1,4 @@
 # Import needed libraries
-from django.db.models import DecimalField, Sum, Value
-from django.db.models.functions import Coalesce
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
