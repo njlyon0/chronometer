@@ -1,9 +1,10 @@
+# Import needed libraries
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
 
 
-#
+# Table for a person who logs hours (one row per uniquely-named person)
 class Person(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
@@ -11,14 +12,14 @@ class Person(models.Model):
         return self.name
 
 
-#
+# Table for a uniquely-named project against which hours are logged
 class Project(models.Model):
     name = models.CharField(max_length=200, unique=True)
 
     def __str__(self) -> str:
         return self.name
 
-# 
+# Table for hours that one person spent on one project in one week
 class WeeklyHours(models.Model):
     person = models.ForeignKey(
         Person, on_delete=models.CASCADE, related_name="weekly_hours"
@@ -34,6 +35,13 @@ class WeeklyHours(models.Model):
     class Meta:
         verbose_name_plural = "weekly hours"
         ordering = ["-week_of"]
+        # Add a constraint that each combination of person/project/week must be unique
+        constraints = [
+            models.UniqueConstraint(
+                fields=["person", "project", "week_of"],
+                name="unique_person_project_week",
+            )
+        ]
 
     def clean(self) -> None:
         if self.week_of and self.week_of.weekday() != 0:
