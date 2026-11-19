@@ -15,6 +15,7 @@ services:
     # Live code: runserver reloads on save, no rebuild needed
     volumes:
       - ./app:/app/app
+      - ./data:/data:ro
     # Wait until Postgres is accepting connections, not just started
     depends_on:
       db:
