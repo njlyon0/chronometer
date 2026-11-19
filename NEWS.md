@@ -1,3 +1,8 @@
+## Version 0.5.0 - CSV Import Command
+
+- Adds ability to pass CSV of people/project/week/hours for integration into database
+
+
 ## Version 0.4.0 - Django
 
 - Adds Django app scaffolding (`app/manage.py`, `app/config/`, & `app/tracker/`)
