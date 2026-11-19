@@ -1,0 +1,13 @@
+<!doctype html>
+<title>Chronometer — totals</title>
+<h1>Total hours by project</h1>
+<table>
+  <thead><tr><th>Project</th><th>Hours</th></tr></thead>
+  <tbody>
+    {% for p in projects %}
+      <tr><td>{{ p.name }}</td><td>{{ p.total_hours }}</td></tr>
+    {% empty %}
+      <tr><td colspan="2">No projects yet — add some in the admin.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
