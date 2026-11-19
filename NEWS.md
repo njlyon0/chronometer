@@ -1,9 +1,8 @@
-## Version 0.4.0 - Dev
-
-This is the development version, changes will be listed below as they are made.
+## Version 0.4.0 - Django
 
 - Adds Django app scaffolding (`app/manage.py`, `app/config/`, & `app/tracker/`)
-
+- Adds constraint that `WeeklyHours` needs to be unique combinations of person/project/week
+- Registers Django admin
 
 ## Version 0.3.0 - Queries
 
