@@ -93,9 +93,9 @@ class Command(BaseCommand):
                         week_of=r["week_of"],
                         defaults={"hours": r["hours"]},
                     )
-                    if created: 
+                    if created:
                         created_count += 1
-                    else: 
+                    else:
                         updated_count += 1
                 if options["dry_run"]:
                     transaction.set_rollback(True)
