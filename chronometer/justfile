@@ -18,6 +18,13 @@ restart:
 build *args:
     docker compose build {{args}}
 
+# Run the test suite in a container (extra arguments passed to `pytest`)
+test *args:
+    docker compose run --rm --build test pytest {{args}}
+
+# Run just local tests (faster-for when Postgres isn't needed)
+test-local *args:
+    uv run pytest {{args}}
 
 # Run ruff format fixes
 ruff:

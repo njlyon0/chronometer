@@ -37,6 +37,18 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  test:
+    build:
+      context: .
+      target: test
+    env_file: .env
+    environment:
+      DB_HOST: db
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles: ["test"]
+
 # Named volume so Postgres data persists across `docker compose down` / `up`
 volumes:
   pgdata:
