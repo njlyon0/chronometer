@@ -14,6 +14,10 @@ down:
 restart:
     docker compose restart app
 
+# (Re)build images
+build *args:
+    docker compose build {{args}}
+
 
 # Run ruff format fixes
 ruff:
