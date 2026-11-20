@@ -37,6 +37,14 @@ test *args:
 test-local *args:
     uv run pytest {{args}}
 
+# Django shell (Python + ORM)
+shell:
+    {{manage}} shell
+
+# psql prompt in the database container
+dbshell:
+    docker compose exec db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+    
 # Run ruff format fixes
 style *paths:
     uv run ruff format {{ if paths == "" { "." } else { paths } }}
