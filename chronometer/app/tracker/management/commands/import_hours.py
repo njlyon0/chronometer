@@ -65,20 +65,38 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser: CommandParser) -> None:
         parser.add_argument("path", type=Path)
+        parser.add_argument(
+            "--dry-run",
+            action="store_true",
+            help="Report what would change; write nothing",
+        )
 
     def handle(self, *args: Any, **options: Any) -> None:
         with options["path"].open(newline="") as f:
             reader = csv.DictReader(f)
-            # Don't stop when bad rows are encountered in the CSV
+            # Separate malformed vs. good rows of the given CSV
             good, bad = [], []
             for row in reader:
                 try:
                     good.append(parse_row(row))
                 except ValueError as e:
                     bad.append((reader.line_num, str(e)))
-            # Grab each good row
+            # Grab each good row and add it to the database (rolling back on a dry run)
             with transaction.atomic():
                 for r in good:
                     person, _ = Person.objects.get_or_create(name=r["person"])
                     project, _ = Project.objects.get_or_create(name=r["project"])
-                    WeeklyHours.objects.create(person=person, project=project, week_of=r["week_of"], hours=r["hours"])
+                    WeeklyHours.objects.create(
+                        person=person,
+                        project=project,
+                        week_of=r["week_of"],
+                        hours=r["hours"],
+                    )
+                if options["dry_run"]:
+                    transaction.set_rollback(True)
+            # Report the results
+            if options["dry_run"]:
+                self.stdout.write(self.style.WARNING("DRY RUN — no changes saved"))
+            self.stdout.write(f"{len(good)} good rows, {len(bad)} bad rows")
+            for line, message in bad:
+                self.stderr.write(self.style.ERROR(f"line {line}: {message}"))
