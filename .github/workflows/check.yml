@@ -24,9 +24,17 @@ jobs:
           enable-cache: true
       - run: uv sync --locked
       - run: uv run python --version
+      - name: Lint
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+      - name: Typecheck
+        run: uv run mypy
       - run: uv run chronometer-db-check
       - run: uv run python app/manage.py migrate
       - run: uv run python app/manage.py makemigrations --check --dry-run
+      - name: Test
+        run: uv run pytest
     services:
       postgres:
         image: postgres:16
