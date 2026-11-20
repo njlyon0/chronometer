@@ -44,7 +44,11 @@ shell:
 # psql prompt in the database container
 dbshell:
     docker compose exec db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
-    
+
+# Follow logs
+logs service="":
+    docker compose logs -f --tail=100 {{service}}
+
 # Run ruff format fixes
 style *paths:
     uv run ruff format {{ if paths == "" { "." } else { paths } }}
