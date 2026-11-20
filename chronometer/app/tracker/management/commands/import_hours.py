@@ -3,6 +3,8 @@ import csv
 from pathlib import Path
 from typing import Any
 from django.core.management.base import BaseCommand, CommandParser
+from django.db import transaction
+from tracker.models import Person, Project, WeeklyHours
 from datetime import date
 from decimal import Decimal, InvalidOperation
 from chronometer import core
@@ -70,3 +72,9 @@ class Command(BaseCommand):
                     good.append(parse_row(row))
                 except ValueError as e:
                     bad.append((reader.line_num, str(e)))
+            # Grab each good row
+            with transaction.atomic():
+                for r in good:
+                    person, _ = Person.objects.get_or_create(name=r["person"])
+                    project, _ = Project.objects.get_or_create(name=r["project"])
+                    WeeklyHours.objects.create(person=person, project=project, week_of=r["week_of"], hours=r["hours"])
