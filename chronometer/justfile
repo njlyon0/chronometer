@@ -2,6 +2,9 @@
 default:
     @just --list
 
+# Variables (to simplify internal pieces of subsequent recipes)
+manage := "docker compose exec app python app/manage.py"
+
 # Start all services in the background
 up:
     docker compose up -d
@@ -17,6 +20,14 @@ restart:
 # (Re)build images
 build *args:
     docker compose build {{args}}
+
+# Apply database migrations
+migrate:
+    {{manage}} migrate
+
+# Create new migrations after changing models
+makemigrations *args:
+    {{manage}} makemigrations {{args}}
 
 # Run the test suite in a container (extra arguments passed to `pytest`)
 test *args:
