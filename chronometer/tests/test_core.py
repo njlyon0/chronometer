@@ -8,6 +8,10 @@ import pytest
 from chronometer.core import Person, Project, WeeklyHours, add_hours, total_by_project
 
 
+# Fail on purpose to check that CI catches a broken test
+def test_deliberately_fails() -> None:
+    assert 1 == 2
+
 # Test that `add_hours()` only returns one new record
 def test_add_hours_returns_list_with_new_record() -> None:
     # Assign acceptable values to each parameter
