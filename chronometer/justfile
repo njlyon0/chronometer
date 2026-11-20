@@ -49,6 +49,11 @@ dbshell:
 logs service="":
     docker compose logs -f --tail=100 {{service}}
 
+# Import a CSV
+import file *flags:
+    test -f data/{{file}} || (echo "no such file: data/{{file}}" && exit 1)
+    {{manage}} import_hours /data/{{file}} {{flags}}
+
 # Run ruff format fixes
 style *paths:
     uv run ruff format {{ if paths == "" { "." } else { paths } }}
