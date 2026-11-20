@@ -38,5 +38,5 @@ test-local *args:
     uv run pytest {{args}}
 
 # Run ruff format fixes
-ruff:
-    uv run ruff format .
+style *paths:
+    uv run ruff format {{ if paths == "" { "." } else { paths } }}
