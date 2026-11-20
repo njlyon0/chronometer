@@ -1,13 +1,17 @@
-# Load needed libraries
+# Load standard library stuff
 import csv
-from pathlib import Path
-from typing import Any
-from django.core.management.base import BaseCommand, CommandParser
-from django.db import transaction
-from tracker.models import Person, Project, WeeklyHours
 from datetime import date
 from decimal import Decimal, InvalidOperation
+from pathlib import Path
+from typing import Any
+
+# Load third party packages
+from django.core.management.base import BaseCommand, CommandParser
+from django.db import transaction
+
+# Load code from this app
 from chronometer import core
+from tracker.models import Person, Project, WeeklyHours
 
 # Columns that every row must have
 REQUIRED = ("person", "project", "week_of", "hours")
