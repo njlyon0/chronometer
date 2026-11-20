@@ -1,3 +1,7 @@
+## Version 0.6.0 - Just
+
+- Adds `justfile` to simplify command line interactions
+
 ## Version 0.5.0 - CSV Import Command
 
 - Adds ability to pass CSV of people/project/week/hours for integration into database
