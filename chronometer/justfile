@@ -5,3 +5,16 @@ default:
 # Start all services in the background
 up:
     docker compose up -d
+
+# End all services
+down:
+    docker compose down
+
+# Restart an app
+restart:
+    docker compose restart app
+
+
+# Run ruff format fixes
+ruff:
+    uv run ruff format .
