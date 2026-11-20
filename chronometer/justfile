@@ -10,8 +10,8 @@ up:
     docker compose up -d
 
 # End all services
-down:
-    docker compose down
+down *args:
+    docker compose down {{args}}
 
 # Restart an app
 restart:
@@ -53,6 +53,12 @@ logs service="":
 import file *flags:
     test -f data/{{file}} || (echo "no such file: data/{{file}}" && exit 1)
     {{manage}} import_hours /data/{{file}} {{flags}}
+
+# After confirmation, delete containers _and_ database volume, then rebuild from scratch
+[confirm("This deletes all database data. Continue? (y/n)")]
+nuke:
+    just down -v
+    just build --no-cache
 
 # Run ruff format fixes
 style *paths:
