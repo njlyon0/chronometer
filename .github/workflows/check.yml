@@ -13,6 +13,7 @@ jobs:
       POSTGRES_PASSWORD: chronometer
       POSTGRES_DB: chronometer
       DB_HOST: localhost
+      SECRET_KEY: ci-only-not-secret
     defaults:
       run:
         working-directory: chronometer
