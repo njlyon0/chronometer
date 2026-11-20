@@ -1,4 +1,10 @@
-﻿person,project,week_of,hours
-Nick,Tempo,11/16/26,10
-Nick,DSI,11/16/26,2
-Kithri,Tempo,11/9/26,15
+person,project,week_of,hours
+Nick,Tempo,2026-11-16,10
+Nick,DSI,2026-11-16,2
+Kithri,Tempo,2026-11-09,15
+NoHours,Hearings,2026-11-16,
+NonNumberHours,Docs,2026-11-09,ten
+Neg Hours,Tempo,2026-11-09,-5
+Tuesday,DSI,2026-11-10,2
+,DSI,2026-11-09,40
+BadDate,Tempo,2026-11-02,1
