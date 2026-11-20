@@ -36,3 +36,9 @@ files = ["src", "tests"]
 
 [tool.pyrefly]
 python-interpreter-path = ".venv/bin/python"
+
+[tool.ruff]
+extend-exclude = ["app/tracker/migrations"]
+
+[tool.ruff.lint.per-file-ignores]
+"app/**" = ["RUF012"]
