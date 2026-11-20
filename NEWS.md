@@ -1,7 +1,10 @@
 ## Version 0.5.0 - CSV Import Command
 
 - Adds ability to pass CSV of people/project/week/hours for integration into database
-
+- Validates every CSV row and reports bad rows by line number
+- Wraps the import in a transaction (all rows save, or none do)
+- Adds `--dry-run` flag to preview an import without saving
+- Updates existing rows if person/project/week found in CSV (instead of making duplicates)
 
 ## Version 0.4.0 - Django
 
