@@ -82,21 +82,28 @@ class Command(BaseCommand):
                 except ValueError as e:
                     bad.append((reader.line_num, str(e)))
             # Grab each good row and add it to the database (rolling back on a dry run)
+            created_count = updated_count = 0
             with transaction.atomic():
                 for r in good:
                     person, _ = Person.objects.get_or_create(name=r["person"])
                     project, _ = Project.objects.get_or_create(name=r["project"])
-                    WeeklyHours.objects.create(
+                    _, created = WeeklyHours.objects.update_or_create(
                         person=person,
                         project=project,
                         week_of=r["week_of"],
-                        hours=r["hours"],
+                        defaults={"hours": r["hours"]},
                     )
+                    if created: 
+                        created_count += 1
+                    else: 
+                        updated_count += 1
                 if options["dry_run"]:
                     transaction.set_rollback(True)
             # Report the results
             if options["dry_run"]:
                 self.stdout.write(self.style.WARNING("DRY RUN — no changes saved"))
-            self.stdout.write(f"{len(good)} good rows, {len(bad)} bad rows")
+            self.stdout.write(
+                f"{created_count} created, {updated_count} updated, {len(bad)} bad rows"
+            )
             for line, message in bad:
                 self.stderr.write(self.style.ERROR(f"line {line}: {message}"))
