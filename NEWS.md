@@ -1,4 +1,4 @@
-## Version 0.70 - Continuous Integration
+## Version 0.7.0 - Continuous Integration
 
 - Adds CI for testing and formatting
 - Adds pre-commit lint hook
