@@ -1,4 +1,8 @@
-## Version 0.70 - Continuous Integration
+## Version 1.0.0 - Production-Style Image
+
+- Creates separate production image with proper Docker support
+
+## Version 0.7.0 - Continuous Integration
 
 - Adds CI for testing and formatting
 - Adds pre-commit lint hook
