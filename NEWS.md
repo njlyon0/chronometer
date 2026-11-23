@@ -1,3 +1,9 @@
+## Version 0.70 - Continuous Integration
+
+- Adds CI for testing and formatting
+- Adds pre-commit lint hook
+- Adds `just lint` recipe (preventative shorthand for pre-commit check)
+
 ## Version 0.6.0 - Just
 
 - Adds `justfile` to simplify command line interactions
