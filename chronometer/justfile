@@ -63,3 +63,7 @@ nuke:
 # Run ruff format fixes
 style *paths:
     uv run ruff format {{ if paths == "" { "." } else { paths } }}
+
+# Lint to complement the pre-commit hook
+lint:
+    uv run pre-commit run --all-files
